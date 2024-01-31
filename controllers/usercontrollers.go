@@ -12,7 +12,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-//signup
+//signup , looking for a little change
 
 func Signup(c *gin.Context) {
 	//Get the Email&pass
