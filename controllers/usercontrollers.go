@@ -12,15 +12,15 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-//signup , looking for a little change
+//signup
+//Get the email and pass
+
+var body struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
 
 func Signup(c *gin.Context) {
-	//Get the Email&pass
-
-	var body struct {
-		Email    string `json:"email"`
-		Password string `json:"password"`
-	}
 
 	if c.BindJSON(&body) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -54,12 +54,6 @@ func Signup(c *gin.Context) {
 }
 
 func Login(c *gin.Context) {
-	//Get the email and pass
-
-	var body struct {
-		Email    string `json:"email"`
-		Password string `json:"password"`
-	}
 
 	if c.BindJSON(&body) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -98,7 +92,7 @@ func Login(c *gin.Context) {
 	}
 
 	c.SetSameSite(http.SameSiteLaxMode)
-	c.SetCookie("Authorization", tokenstring, 36000*24*30, "", "", false, true)
+	c.SetCookie("Authorization", tokenstring, 3600*24*30, "", "", false, true)
 
 	c.JSON(http.StatusOK, gin.H{})
 
